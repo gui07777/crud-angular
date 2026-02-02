@@ -1,0 +1,37 @@
+<section>
+    <div class="form" [formGroup]="form">
+        <div class="logo">
+            <img src="Group.png" alt="">
+        </div>
+        <div>
+            <h2>Cadastre-se aqui!</h2>
+            <div class="fields">
+                <div class="field">
+                    <label for="">E-mail</label>
+                    <div>
+                        <input type="text" formControlName="email" placeholder="Digite">
+                        <span class="material-symbols-outlined">mail</span>
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="">Senha</label>
+                    <div>
+                        <input type="password" formControlName="password" placeholder="Digite">
+                        <span class="material-symbols-outlined">visibility</span>
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="">Confirme sua senha</label>
+                    <div>
+                        <input type="password" formControlName="confirmPassword" placeholder="Digite">
+                        <span class="material-symbols-outlined">visibility</span>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <button (click)="registerUser()">Registrar</button>
+                    <!-- <button (click)="goFirstAccess()">Primeiro Acesso</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
