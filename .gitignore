@@ -1,0 +1,12 @@
+# Ignora as dependências de todos os projetos
+node_modules/
+**/node_modules/
+
+# Ignora pastas de compilação
+dist/
+.angular/
+
+# Arquivos de log e sistema
+npm-debug.log*
+yarn-error.log*
+.DS_Store
