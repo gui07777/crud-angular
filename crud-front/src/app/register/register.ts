@@ -1,5 +1,4 @@
-import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../../services/user';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
@@ -16,7 +15,6 @@ export class Register {
   form: FormGroup;
 
   constructor(
-    private location: Location,
     private route: Router,
     private userService: User,
     private formBuilder: FormBuilder
@@ -38,12 +36,7 @@ export class Register {
       password: this.form.value.password
     }
 
-    console.log('dados pegos no form: ', dto)
-
     this.userService.registerUser(dto).subscribe({
-      next: response => {
-        console.log('usuario registrado com sucesso', response)
-      },
       error: error => {
         console.error('Erro ao cadastrar usuário', error)
       }

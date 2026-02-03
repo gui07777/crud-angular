@@ -9,7 +9,7 @@ export class User extends Document {
     password: string;
 }
 
-export const UserSchema = SchemaFactory.createForClass(User)
+export const UserSchema = SchemaFactory.createForClass(User); // aqui User que é uma classe typescript é transformado em um schema do mongodb pela fabrica de schemas que usa o metodo criar para classe (nome da classe)
 
 //os schemas são tipos de arquivos que representam cada coleção/tabela do banco de dados
 /* as suas responsabilidades incluem :

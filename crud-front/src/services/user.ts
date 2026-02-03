@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Api } from './connectApi/api';
 import { HttpClient } from '@angular/common/http';
 import { RegisterUserDto } from '../dtos/register-user.dto';
+import { VerifyUserResponse } from '../dtos/verify-user-response.dto';
 
 @Injectable({
   providedIn: 'root',
@@ -17,9 +18,15 @@ export class User {
     this.apiUrl = `${this.api.baseUrl}/user`;
   }
 
-
   registerUser(dto: RegisterUserDto) {
     console.log(dto)
     return this.http.post(`${this.apiUrl}/register-user`, dto)
+  }
+
+  verifyUser(dto: RegisterUserDto) {
+    return this.http.post<VerifyUserResponse>(
+      `${this.apiUrl}/verify-user`,
+      dto
+    );
   }
 }
