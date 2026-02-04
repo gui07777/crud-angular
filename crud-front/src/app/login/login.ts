@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
-import { RegisterUserDto } from '../../dtos/register-user.dto';
 import { User } from '../../services/user';
+import { LoginUserDto } from '../../dtos/login-user.dto';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -16,29 +17,33 @@ export class Login {
   constructor(
     private route: Router,
     private fb: FormBuilder,
-    private userService: User
+    private userService: User,
+    private toastr: ToastrService
   ) {
     this.form = this.fb.group({
       email: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
+      confirmPassword: ['', Validators.required]
     })
   }
 
   verifyUser() {
-    const dto: RegisterUserDto = {
+    const dto: LoginUserDto = {
       email: this.form.value.email,
       password: this.form.value.password
     }
 
     this.userService.verifyUser(dto).subscribe({
-      next: (response) => {
-        if (response.success) {
-          console.log('response: ', response)
-          // this.welcome()
+      next: (response: any) => {
+        if (response.canProceed) {
+          localStorage.setItem('userId', String(response.foundUser));
+          console.log('userId salvo:', localStorage.getItem('userId'));
+          this.route.navigateByUrl('/landing-page')
         }
       },
       error: err => {
-        console.error('O usuário não foi encontrado no banco', err)
+        this.toastr.error('Login ou Senha inválidos', 'Tente novamente')
+        console.error(err)
       }
     })
   }
@@ -47,7 +52,4 @@ export class Login {
     this.route.navigate(['/register'])
   }
 
-  welcome() {
-    alert('WELCOME')
-  }
 }
